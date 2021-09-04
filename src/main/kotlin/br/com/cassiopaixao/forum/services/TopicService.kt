@@ -26,26 +26,30 @@ class TopicService (
         return  topicViewMapper.map(topic)
     }
 
-    fun create(topicForm: TopicForm) {
+    fun create(topicForm: TopicForm): TopicView {
         var topic = topicFormMapper.map(topicForm);
         topic.id = topics.size.toLong() + 1
         topics = topics.plus(topic)
+        return topicViewMapper.map(topic)
     }
 
-    fun update(updateTopicForm: UpdateTopicForm) {
+    fun update(updateTopicForm: UpdateTopicForm): TopicView {
         var topic =  topics.stream().filter { t -> t.id == updateTopicForm.id }.findFirst().get()
 
-        topics = topics.minus(topic).plus(
-            Topic(
-                id = updateTopicForm.id,
-                title = updateTopicForm.title,
-                message = updateTopicForm.message,
-                author = topic.author,
-                course = topic.course,
-                response = topic.response,
-                status = topic.status,
-                dateCreated = topic.dateCreated
-        ))
+        val topicUpdated = Topic(
+            id = updateTopicForm.id,
+            title = updateTopicForm.title,
+            message = updateTopicForm.message,
+            author = topic.author,
+            course = topic.course,
+            response = topic.response,
+            status = topic.status,
+            dateCreated = topic.dateCreated
+        )
+
+        topics = topics.minus(topic).plus(topicUpdated)
+
+        return topicViewMapper.map(topicUpdated)
     }
 
     fun delete(id: Long) {
