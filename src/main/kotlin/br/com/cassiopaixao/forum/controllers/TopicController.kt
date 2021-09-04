@@ -1,7 +1,7 @@
 package br.com.cassiopaixao.forum.controllers
 
-import br.com.cassiopaixao.forum.dto.TopicDto
-import br.com.cassiopaixao.forum.model.Topic
+import br.com.cassiopaixao.forum.dto.TopicForm
+import br.com.cassiopaixao.forum.dto.TopicView
 import br.com.cassiopaixao.forum.services.TopicService
 import org.springframework.web.bind.annotation.*
 
@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.*
 class TopicController (private val service: TopicService) {
 
     @GetMapping
-    fun list(): List<Topic> {
+    fun list(): List<TopicView> {
         return service.list()
     }
 
     @GetMapping("/{id}")
-    fun findById(@PathVariable id: Long): Topic {
+    fun findById(@PathVariable id: Long): TopicView {
         return service.findById(id)
     }
 
     @PostMapping
-    fun create(@RequestBody topicDto: TopicDto) {
-        service.create(topicDto)
+    fun create(@RequestBody topicForm: TopicForm) {
+        service.create(topicForm)
     }
 }
