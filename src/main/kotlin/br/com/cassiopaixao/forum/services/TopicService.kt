@@ -2,6 +2,7 @@ package br.com.cassiopaixao.forum.services
 
 import br.com.cassiopaixao.forum.dto.TopicForm
 import br.com.cassiopaixao.forum.dto.TopicView
+import br.com.cassiopaixao.forum.dto.UpdateTopicForm
 import br.com.cassiopaixao.forum.mapper.TopicFormMapper
 import br.com.cassiopaixao.forum.mapper.TopicViewMapper
 import br.com.cassiopaixao.forum.model.Topic
@@ -29,5 +30,21 @@ class TopicService (
         var topic = topicFormMapper.map(topicForm);
         topic.id = topics.size.toLong() + 1
         topics = topics.plus(topic)
+    }
+
+    fun update(updateTopicForm: UpdateTopicForm) {
+        var topic =  topics.stream().filter { t -> t.id == updateTopicForm.id }.findFirst().get()
+
+        topics = topics.minus(topic).plus(
+            Topic(
+            id = updateTopicForm.id,
+            title = updateTopicForm.title,
+            message = updateTopicForm.message,
+            author = topic.author,
+            course = topic.course,
+            response = topic.response,
+            status = topic.status,
+            dateCreated = topic.dateCreated,
+        ))
     }
 }
