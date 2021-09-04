@@ -3,6 +3,7 @@ package br.com.cassiopaixao.forum.services
 import br.com.cassiopaixao.forum.dto.TopicForm
 import br.com.cassiopaixao.forum.dto.TopicView
 import br.com.cassiopaixao.forum.dto.UpdateTopicForm
+import br.com.cassiopaixao.forum.exceptions.NotFoundException
 import br.com.cassiopaixao.forum.mapper.TopicFormMapper
 import br.com.cassiopaixao.forum.mapper.TopicViewMapper
 import br.com.cassiopaixao.forum.model.Topic
@@ -14,7 +15,8 @@ import kotlin.collections.ArrayList
 class TopicService (
     private var topics: List<Topic> = ArrayList(),
     private val topicViewMapper: TopicViewMapper,
-    private val topicFormMapper: TopicFormMapper
+    private val topicFormMapper: TopicFormMapper,
+    private val notFoundMessage: String = "Topic not found!"
 ) {
 
     fun list(): List<TopicView> {
@@ -22,7 +24,9 @@ class TopicService (
     }
 
     fun findById(topicId: Long): TopicView {
-        var topic =  topics.stream().filter { t -> t.id == topicId }.findFirst().get()
+        var topic =  topics.stream().filter { t -> t.id == topicId }
+            .findFirst()
+            .orElseThrow { NotFoundException(notFoundMessage) }
         return  topicViewMapper.map(topic)
     }
 
@@ -34,7 +38,9 @@ class TopicService (
     }
 
     fun update(updateTopicForm: UpdateTopicForm): TopicView {
-        var topic =  topics.stream().filter { t -> t.id == updateTopicForm.id }.findFirst().get()
+        var topic =  topics.stream().filter { t -> t.id == updateTopicForm.id }
+            .findFirst()
+            .orElseThrow{NotFoundException(notFoundMessage)}
 
         val topicUpdated = Topic(
             id = updateTopicForm.id,
@@ -53,7 +59,10 @@ class TopicService (
     }
 
     fun delete(id: Long) {
-        var topic =  topics.stream().filter { t -> t.id == id }.findFirst().get()
+        var topic =  topics.stream().filter { t -> t.id == id }
+            .findFirst()
+            .orElseThrow { NotFoundException(notFoundMessage) }
+
         topics = topics.minus(topic)
     }
 }

@@ -6,7 +6,6 @@ import br.com.cassiopaixao.forum.services.CourseService
 import br.com.cassiopaixao.forum.services.UserService
 import org.springframework.stereotype.Component
 
-
 @Component
 class TopicFormMapper(
     private val courseService: CourseService,

@@ -10,7 +10,7 @@ data class TopicForm (
     val title: String,
 
     @field:NotEmpty
-    @field:Size(min = 10, max = 250)
+    @field:Size(min = 10, max = 250, message = "Title must be between 5 and 10 char")
     val message: String,
 
     @field:NotNull
