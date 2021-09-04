@@ -37,14 +37,19 @@ class TopicService (
 
         topics = topics.minus(topic).plus(
             Topic(
-            id = updateTopicForm.id,
-            title = updateTopicForm.title,
-            message = updateTopicForm.message,
-            author = topic.author,
-            course = topic.course,
-            response = topic.response,
-            status = topic.status,
-            dateCreated = topic.dateCreated,
+                id = updateTopicForm.id,
+                title = updateTopicForm.title,
+                message = updateTopicForm.message,
+                author = topic.author,
+                course = topic.course,
+                response = topic.response,
+                status = topic.status,
+                dateCreated = topic.dateCreated
         ))
+    }
+
+    fun delete(id: Long) {
+        var topic =  topics.stream().filter { t -> t.id == id }.findFirst().get()
+        topics = topics.minus(topic)
     }
 }
