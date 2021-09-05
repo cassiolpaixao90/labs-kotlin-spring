@@ -14,7 +14,7 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/topics")
-class TopicController (private val service: TopicService) {
+class TopicController(private val service: TopicService) {
 
     @GetMapping
     fun list(): List<TopicView> {

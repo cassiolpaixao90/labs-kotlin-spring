@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service
 import java.util.stream.Collectors
 
 @Service
-class TopicService (
+class TopicService(
     private val topicRepository: TopicRepository,
     private val topicViewMapper: TopicViewMapper,
     private val topicFormMapper: TopicFormMapper,
@@ -23,9 +23,9 @@ class TopicService (
     }
 
     fun findById(topicId: Long): TopicView {
-        var topic =  topicRepository.findById(topicId)
+        var topic = topicRepository.findById(topicId)
             .orElseThrow { NotFoundException(notFoundMessage) }
-        return  topicViewMapper.map(topic)
+        return topicViewMapper.map(topic)
     }
 
     fun create(topicForm: TopicForm): TopicView {
@@ -36,7 +36,7 @@ class TopicService (
 
     fun update(updateTopicForm: UpdateTopicForm): TopicView {
         val topic = topicRepository.findById(updateTopicForm.id)
-            .orElseThrow{ NotFoundException(notFoundMessage) }
+            .orElseThrow { NotFoundException(notFoundMessage) }
 
         topic.title = updateTopicForm.title;
         topic.message = updateTopicForm.message;
@@ -45,6 +45,6 @@ class TopicService (
     }
 
     fun delete(id: Long) {
-       topicRepository.deleteById(id)
+        topicRepository.deleteById(id)
     }
 }

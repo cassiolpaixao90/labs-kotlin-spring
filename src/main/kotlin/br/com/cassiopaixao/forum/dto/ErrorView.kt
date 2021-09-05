@@ -1,7 +1,8 @@
 package br.com.cassiopaixao.forum.dto
+
 import java.time.LocalDateTime
 
-data class ErrorView (
+data class ErrorView(
     val timestamp: LocalDateTime = LocalDateTime.now(),
     val status: Int,
     val error: String,
