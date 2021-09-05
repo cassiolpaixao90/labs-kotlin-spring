@@ -1,11 +1,12 @@
 package br.com.cassiopaixao.forum.model
 
-import javax.persistence.*
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
 
-@Entity
+@Document
 data class User(
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    @Id
+    var id: String? = null,
     val name: String,
     val email: String
 )

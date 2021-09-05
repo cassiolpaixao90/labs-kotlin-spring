@@ -1,7 +1,6 @@
-package br.com.cassiopaixao.forum.dto
+package br.com.cassiopaixao.forum.dto.topic
 
 import javax.validation.constraints.NotEmpty
-import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
 
 data class TopicForm(
@@ -13,9 +12,9 @@ data class TopicForm(
     @field:Size(min = 10, max = 250, message = "Title must be between 5 and 10 char")
     val message: String,
 
-    @field:NotNull
-    val courseId: Long,
+    @field:NotEmpty
+    val courseId: String?,
 
-    @field:NotNull
-    val authorId: Long
+    @field:NotEmpty
+    val authorId: String?
 )

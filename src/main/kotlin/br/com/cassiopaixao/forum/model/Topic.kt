@@ -1,28 +1,23 @@
 package br.com.cassiopaixao.forum.model
 
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.DBRef
+import org.springframework.data.mongodb.core.mapping.Document
 import java.time.LocalDateTime
-import javax.persistence.*
+import kotlin.collections.ArrayList
 
-@Entity
+@Document
 data class Topic(
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null,
-
+    @Id
+    var id: String? = null,
     var title: String,
-
     var message: String,
-
     val dateCreated: LocalDateTime = LocalDateTime.now(),
-
-    @ManyToOne
-    val course: Course,
-
-    @ManyToOne
-    val author: User,
-
-    @Enumerated(value = EnumType.STRING)
+    @DBRef
+    val course: Course?,
+    @DBRef
+    val author: User?,
     val status: TopicStatus = TopicStatus.NOT_ANSWERED,
-
-    @OneToMany(mappedBy = "topic")
+    @DBRef
     val response: List<Response> = ArrayList()
 )

@@ -1,22 +1,17 @@
 package br.com.cassiopaixao.forum.model
 
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.DBRef
+import org.springframework.data.mongodb.core.mapping.Document
 import java.time.LocalDateTime
-import javax.persistence.*
 
-@Entity
+@Document
 data class Response(
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
-
+    @Id
+    var id: String? = null,
     val message: String,
-
     val dateCreated: LocalDateTime = LocalDateTime.now(),
-
-    @ManyToOne
     val author: User,
-
-    @ManyToOne
     val topic: Topic,
-
     val solution: Boolean
 )

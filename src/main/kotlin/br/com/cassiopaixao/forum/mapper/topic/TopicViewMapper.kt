@@ -1,6 +1,7 @@
-package br.com.cassiopaixao.forum.mapper
+package br.com.cassiopaixao.forum.mapper.topic
 
-import br.com.cassiopaixao.forum.dto.TopicView
+import br.com.cassiopaixao.forum.dto.topic.TopicView
+import br.com.cassiopaixao.forum.mapper.Mapper
 import br.com.cassiopaixao.forum.model.Topic
 import org.springframework.stereotype.Component
 

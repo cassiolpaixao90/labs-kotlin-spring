@@ -1,14 +1,16 @@
 package br.com.cassiopaixao.forum.model
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.index.Indexed
+import org.springframework.data.mongodb.core.mapping.Document
 
-@Entity
+@Document()
 data class Course(
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    @Id
+    var id: String? = null,
+
+    @Indexed(unique = true)
     val name: String,
+
     val category: String
 )

@@ -1,14 +1,13 @@
 package br.com.cassiopaixao.forum.controllers
 
-import br.com.cassiopaixao.forum.dto.TopicForm
-import br.com.cassiopaixao.forum.dto.TopicView
-import br.com.cassiopaixao.forum.dto.UpdateTopicForm
+import br.com.cassiopaixao.forum.dto.topic.TopicForm
+import br.com.cassiopaixao.forum.dto.topic.TopicView
+import br.com.cassiopaixao.forum.dto.topic.UpdateTopicForm
 import br.com.cassiopaixao.forum.services.TopicService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.util.UriBuilder
 import org.springframework.web.util.UriComponentsBuilder
 import javax.validation.Valid
 
@@ -22,7 +21,7 @@ class TopicController(private val service: TopicService) {
     }
 
     @GetMapping("/{id}")
-    fun findById(@PathVariable id: Long): TopicView {
+    fun findById(@PathVariable id: String): TopicView {
         return service.findById(id)
     }
 
@@ -44,7 +43,7 @@ class TopicController(private val service: TopicService) {
     @DeleteMapping("/{id}")
     @Transactional
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun delete(@PathVariable id: Long) {
+    fun delete(@PathVariable id: String) {
         service.delete(id)
     }
 }

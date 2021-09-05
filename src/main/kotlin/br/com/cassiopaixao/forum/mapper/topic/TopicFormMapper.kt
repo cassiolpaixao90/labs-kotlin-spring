@@ -1,6 +1,7 @@
-package br.com.cassiopaixao.forum.mapper
+package br.com.cassiopaixao.forum.mapper.topic
 
-import br.com.cassiopaixao.forum.dto.TopicForm
+import br.com.cassiopaixao.forum.dto.topic.TopicForm
+import br.com.cassiopaixao.forum.mapper.Mapper
 import br.com.cassiopaixao.forum.model.Topic
 import br.com.cassiopaixao.forum.services.CourseService
 import br.com.cassiopaixao.forum.services.UserService
@@ -14,10 +15,11 @@ class TopicFormMapper(
 
     override fun map(t: TopicForm): Topic {
         return Topic(
+            id = "",
             title = t.title,
             message = t.message,
-            course = courseService.getById(t.courseId),
-            author = userService.getById(t.authorId)
+            course = null,
+            author = null
         )
     }
 }
