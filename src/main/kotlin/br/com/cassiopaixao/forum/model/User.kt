@@ -9,7 +9,6 @@ data class User(
     @Id
     var id: String? = null,
 
-    @Indexed(unique = true)
     val name: String,
 
     @Indexed(unique = true)
