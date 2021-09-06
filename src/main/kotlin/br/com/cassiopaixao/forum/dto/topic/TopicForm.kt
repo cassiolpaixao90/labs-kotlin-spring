@@ -13,8 +13,8 @@ data class TopicForm(
     val message: String,
 
     @field:NotEmpty
-    val courseId: String?,
+    val courseId: String,
 
     @field:NotEmpty
-    val authorId: String?
+    val authorId: String
 )

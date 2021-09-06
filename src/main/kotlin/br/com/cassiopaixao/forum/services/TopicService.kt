@@ -30,8 +30,8 @@ class TopicService(
     }
 
     fun create(topicForm: TopicForm): TopicView {
-        var topic = topicFormMapper.map(topicForm);
-        topicRepository.save(topic);
+        var topic = topicFormMapper.map(topicForm)
+        topicRepository.save(topic)
         return topicViewMapper.map(topic)
     }
 
@@ -39,8 +39,8 @@ class TopicService(
         val topic = topicRepository.findById(updateTopicForm.id)
             .orElseThrow { NotFoundException(notFoundMessage) }
 
-        topic.title = updateTopicForm.title;
-        topic.message = updateTopicForm.message;
+        topic.title = updateTopicForm.title
+        topic.message = updateTopicForm.message
 
         return topicViewMapper.map(topic)
     }

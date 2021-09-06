@@ -17,7 +17,7 @@ class CourseService(
     ) {
 
     fun getById(id: String): CourseView {
-        val course = courseRepository.findById(id).orElseThrow { NotFoundException("not found") };
+        val course = courseRepository.findById(id).orElseThrow { NotFoundException("not found course") };
         return courseViewMapper.map(course)
     }
 
